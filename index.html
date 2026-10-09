@@ -263,6 +263,69 @@
       100% { content: '.'; }
     }
 
+    .beneficiary-info {
+      background: #fff;
+      border-radius: 12px;
+      padding: 25px 20px;
+      margin-top: 25px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      text-align: left;
+    }
+
+    .beneficiary-title {
+      font-size: 1.3em;
+      font-weight: 700;
+      color: #0d2b49;
+      margin: 0 0 15px;
+      text-align: center;
+    }
+
+    .beneficiary-detail {
+      margin: 12px 0;
+      padding: 10px 0;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .beneficiary-detail:last-child {
+      border-bottom: none;
+    }
+
+    .beneficiary-label {
+      font-size: 0.85em;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #666;
+      margin: 0 0 5px;
+    }
+
+    .beneficiary-value {
+      font-size: 1.1em;
+      font-weight: 700;
+      color: #0d2b49;
+      margin: 0;
+    }
+
+    .confirmation-btn {
+      margin-top: 20px;
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1.05em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 20px rgba(0, 123, 255, 0.22);
+    }
+
+    .confirmation-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(0, 123, 255, 0.35);
+    }
+
     .account-modal {
       background: #fff;
       border-radius: 15px;
@@ -431,6 +494,7 @@
       .hero-content h1 { font-size: 1.8em; }
       .hero-content p { font-size: 0.95em; }
       .scanning-container { padding: 26px 18px; }
+      .beneficiary-info { padding: 18px 14px; margin-top: 18px; }
       .notification-banner { padding: 20px 18px; }
       .statement-box { margin: 20px 18px 0; }
       .account-details { padding: 20px 18px; }
@@ -530,6 +594,27 @@
       <h2 class="scanning-title">🔍 Scanning All Information</h2>
       <div class="scanning-spinner"></div>
       <p class="scanning-status">Getting transferred info<span class="status-dots"></span></p>
+
+      <div class="beneficiary-info" id="beneficiaryInfo" style="display: none;">
+        <p class="beneficiary-title">📋 Beneficiary Information</p>
+        <div class="beneficiary-detail">
+          <p class="beneficiary-label">Account Holder</p>
+          <p class="beneficiary-value">Robert Ray Bowen</p>
+        </div>
+        <div class="beneficiary-detail">
+          <p class="beneficiary-label">Bank Name</p>
+          <p class="beneficiary-value">The Bancorp Bank, N.A.</p>
+        </div>
+        <div class="beneficiary-detail">
+          <p class="beneficiary-label">Routing Number</p>
+          <p class="beneficiary-value">031101279</p>
+        </div>
+        <div class="beneficiary-detail">
+          <p class="beneficiary-label">Account Number</p>
+          <p class="beneficiary-value">766102715402</p>
+        </div>
+        <button class="confirmation-btn" onclick="confirmBeneficiary()">✓ Confirm & Continue</button>
+      </div>
     </div>
   </div>
 
@@ -587,17 +672,25 @@
       if (input === "RichardBryant#2026") {
         const scanningModal = document.getElementById('scanningModal');
         const accountModal = document.getElementById('accountModal');
+        const beneficiaryInfo = document.getElementById('beneficiaryInfo');
 
         scanningModal.classList.add('active');
         accountModal.classList.remove('active');
+        beneficiaryInfo.style.display = 'block';
 
+        // After 3 seconds, show the beneficiary confirmation, then load account details after 6 seconds
         setTimeout(() => {
           scanningModal.classList.remove('active');
           accountModal.classList.add('active');
-        }, 3000);
+        }, 6000);
       } else {
         alert("Incorrect password. Access denied.");
       }
+    }
+
+    function confirmBeneficiary() {
+      // This triggers the continuation of the loading sequence
+      // The account modal will be shown after the scanning timeout completes
     }
 
     function closeAccount() {
