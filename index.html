@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oil and Gas Global Limited</title>
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f3f5f7;
+      color: #333;
+    }
+
+    .hero {
+      position: relative;
+      width: 100%;
+      min-height: 650px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-background {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero-background img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.6) saturate(0.9);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(135deg, rgba(13, 43, 73, 0.72) 0%, rgba(0, 88, 179, 0.52) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: #fff;
+      padding: 40px 20px;
+      max-width: 900px;
+    }
+
+    .hero-content h1 {
+      margin: 0;
+      font-size: 3.5em;
+      font-weight: 700;
+      letter-spacing: 2px;
+      line-height: 1.2;
+      text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.6);
+    }
+
+    .hero-content p {
+      margin: 16px 0 0 0;
+      font-size: 1.4em;
+      font-weight: 300;
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+    }
+
+    .cta {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .cta a, .cta button {
+      display: inline-block;
+      padding: 15px 32px;
+      background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%);
+      color: #fff;
+      text-decoration: none;
+      border: 2px solid #fff;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 1.05em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    .cta a:hover, .cta button:hover {
+      transform: translateY(-3px);
+      background: linear-gradient(135deg, #0056b3 0%, #003f8a 100%);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+    }
+
+    section {
+      padding: 80px 20px;
+      background-color: rgba(255, 255, 255, 0.97);
+    }
+
+    section:nth-child(even) {
+      background-color: #f8f9fa;
+    }
+
+    section h2 {
+      margin: 0 0 40px;
+      text-align: center;
+      font-size: 2.8em;
+      font-weight: 700;
+      color: #0d2b49;
+      position: relative;
+      padding-bottom: 20px;
+    }
+
+    section h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70px;
+      height: 5px;
+      background: linear-gradient(90deg, #007BFF, #0056b3);
+      border-radius: 3px;
+    }
+
+    section p {
+      text-align: center;
+      max-width: 850px;
+      margin: 0 auto;
+      color: #666;
+      font-size: 1.1em;
+      line-height: 1.7;
+    }
+
+    .services, .why-choose {
+      max-width: 1300px;
+      margin: 30px auto 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      padding: 30px 24px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+      border-top: 5px solid #007BFF;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+    }
+
+    .card h3 {
+      margin-bottom: 12px;
+      font-size: 1.6em;
+      color: #0d2b49;
+      font-weight: 700;
+    }
+
+    .card p {
+      margin: 0;
+      color: #666;
+      font-size: 1em;
+      line-height: 1.6;
+    }
+
+    #contact, #account {
+      background: linear-gradient(135deg, rgba(240, 248, 255, 0.95) 0%, rgba(230, 244, 255, 0.95) 100%);
+    }
+
+    footer {
+      background: linear-gradient(135deg, #1a2838 0%, #0d1a28 100%);
+      color: #fff;
+      text-align: center;
+      padding: 35px 20px;
+      margin-top: 60px;
+    }
+
+    footer p {
+      margin: 0;
+      font-size: 1em;
+      font-weight: 500;
+    }
+
+    /* Scanning Modal Styles */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .scanning-container {
+      background: linear-gradient(135deg, #f0f8ff 0%, #e6f4ff 100%);
+      border-radius: 15px;
+      padding: 40px;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+
+    .scanning-header {
+      margin-bottom: 30px;
+    }
+
+    .scanning-title {
+      font-size: 2em;
+      font-weight: 700;
+      color: #0d2b49;
+      margin: 0 0 15px 0;
+    }
+
+    .scanning-spinner {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      border: 5px solid #e0e0e0;
+      border-top-color: #007BFF;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 20px 0;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .scanning-status {
+      font-size: 1.1em;
+      color: #0d2b49;
+      font-weight: 600;
+      margin: 15px 0;
+      min-height: 30px;
+    }
+
+    .status-dots {
+      display: inline-block;
+      animation: dots 1.5s steps(4, end) infinite;
+    }
+
+    @keyframes dots {
+      0%, 20% { content: '.'; }
+      40% { content: '..'; }
+      60% { content: '...'; }
+      80%, 100% { content: ''; }
+    }
+
+    /* Account Dashboard Styles */
+    .account-modal {
+      background: #fff;
+      border-radius: 15px;
+      max-width: 800px;
+      width: 100%;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .account-header {
+      background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%);
+      color: #fff;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .account-header h2 {
+      margin: 0;
+      font-size: 2em;
+      color: #fff;
+    }
+
+    .account-header h2::after {
+      display: none;
+    }
+
+    .notification-banner {
+      background: linear-gradient(135deg, #fff3cd 0%, #ffe69c 100%);
+      border-left: 5px solid #ff9800;
+      padding: 25px;
+      margin: 0;
+      border-radius: 0;
+    }
+
+    .notification-title {
+      font-size: 1.3em;
+      font-weight: 700;
+      color: #d97706;
+      margin: 0 0 15px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .notification-title::before {
+      content: '⚠️';
+      font-size: 1.2em;
+    }
+
+    .notification-content {
+      color: #b8860b;
+      font-size: 1em;
+      line-height: 1.8;
+      margin: 0;
+      text-align: left;
+    }
+
+    .notification-content strong {
+      color: #d97706;
+      display: block;
+      margin-top: 10px;
+    }
+
+    .image-placeholder {
+      background: linear-gradient(135deg, #e6f4ff 0%, #f0f8ff 100%);
+      padding: 60px 20px;
+      text-align: center;
+      margin: 30px;
+      border-radius: 10px;
+      border: 2px dashed #007BFF;
+      min-height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .image-placeholder-text {
+      font-size: 1.1em;
+      color: #0056b3;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .image-placeholder-icon {
+      font-size: 4em;
+      margin-bottom: 15px;
+      opacity: 0.6;
+    }
+
+    .account-details {
+      padding: 30px;
+    }
+
+    .details-section {
+      margin-bottom: 25px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .details-section:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .detail-label {
+      font-size: 0.9em;
+      color: #666;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    .detail-value {
+      font-size: 1.3em;
+      color: #0d2b49;
+      font-weight: 700;
+    }
+
+    .action-buttons {
+      padding: 20px 30px 30px;
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .action-btn {
+      padding: 12px 28px;
+      border: none;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 1em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(0, 123, 255, 0.3);
+    }
+
+    .btn-secondary {
+      background: #e0e0e0;
+      color: #333;
+    }
+
+    .btn-secondary:hover {
+      background: #d0d0d0;
+    }
+
+    @media (max-width: 1024px) {
+      .hero-content h1 { font-size: 2.8em; }
+      .hero-content p { font-size: 1.2em; }
+      section h2 { font-size: 2.3em; }
+    }
+
+    @media (max-width: 768px) {
+      .hero { min-height: 500px; }
+      .hero-content h1 { font-size: 2.2em; }
+      .hero-content p { font-size: 1em; }
+      .cta { flex-direction: column; align-items: center; }
+      .cta a, .cta button { width: min(90%, 320px); }
+      section { padding: 50px 20px; }
+      section h2 { font-size: 2em; }
+      .services, .why-choose { grid-template-columns: 1fr; gap: 20px; }
+      
+      .scanning-container {
+        padding: 30px 20px;
+      }
+      
+      .scanning-title {
+        font-size: 1.6em;
+      }
+      
+      .account-modal {
+        max-height: 95vh;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero { min-height: 420px; }
+      .hero-content h1 { font-size: 1.8em; }
+      .hero-content p { font-size: 0.95em; }
+      section h2 { font-size: 1.7em; }
+      
+      .scanning-container {
+        padding: 25px 15px;
+      }
+      
+      .scanning-title {
+        font-size: 1.4em;
+      }
+      
+      .notification-banner {
+        padding: 20px;
+      }
+      
+      .notification-title {
+        font-size: 1.1em;
+      }
+      
+      .action-buttons {
+        flex-direction: column;
+      }
+      
+      .action-btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="hero-background">
+      <img src="IMG_9958.jpeg" alt="Oil and Gas Global Limited">
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>Oil and Gas Global Limited</h1>
+      <p>Powering Progress, Fueling the Future</p>
+      <div class="cta">
+        <a href="#contact">Get Started</a>
+        <a href="#about">Learn More</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="about">
+    <h2>About Us</h2>
+    <p>Oil and Gas Global Limited is a leading provider of energy solutions, specializing in exploration, production, and distribution of oil and gas resources worldwide. We are committed to delivering sustainable and efficient energy solutions with cutting-edge technology and industry expertise.</p>
+  </section>
+
+  <section id="services">
+    <h2>Our Services</h2>
+    <div class="services">
+      <div class="card">
+        <h3>🔍 Exploration</h3>
+        <p>Advanced geological and seismic technologies to discover new reserves with precision and reliability.</p>
+      </div>
+      <div class="card">
+        <h3>⚙️ Production</h3>
+        <p>Efficient extraction processes ensuring maximum output with minimal environmental impact.</p>
+      </div>
+      <div class="card">
+        <h3>🌍 Distribution</h3>
+        <p>Reliable global supply chain delivering energy where it's needed most, on time, every time.</p>
+      </div>
+      <div class="card">
+        <h3>♻️ Sustainability</h3>
+        <p>Investing in renewable energy and reducing carbon footprint for a better tomorrow.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="why">
+    <h2>Why Choose Us</h2>
+    <div class="why-choose">
+      <div class="card">
+        <h3>🌐 Global Reach</h3>
+        <p>Operations spanning multiple continents with local expertise and international standards.</p>
+      </div>
+      <div class="card">
+        <h3>💡 Innovation</h3>
+        <p>Cutting-edge technology driving efficiency and staying ahead of industry trends.</p>
+      </div>
+      <div class="card">
+        <h3>🌱 Sustainability</h3>
+        <p>Commitment to responsible energy solutions protecting our environment.</p>
+      </div>
+      <div class="card">
+        <h3>👥 Expertise</h3>
+        <p>Experienced professionals with deep industry knowledge and proven track record.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <p>Get in touch with our support team for more information about our services</p>
+    <div class="cta">
+      <a href="https://t.me/Oil_and_Gas_LTD" target="_blank">📨 Contact Support</a>
+    </div>
+  </section>
+
+  <section id="account">
+    <h2>My Account Access</h2>
+    <p>Secure access to your account dashboard and portfolio</p>
+    <div class="cta">
+      <button onclick="openAccount()">🔐 Open My Account</button>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 Oil and Gas Global Limited. All rights reserved.</p>
+  </footer>
+
+  <!-- Scanning Modal -->
+  <div class="modal-overlay" id="scanningModal">
+    <div class="scanning-container">
+      <div class="scanning-header">
+        <h2 class="scanning-title">🔍 Scanning Information</h2>
+        <div class="scanning-spinner"></div>
+      </div>
+      <p class="scanning-status">
+        Processing account details<span class="status-dots">.</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- Account Dashboard Modal -->
+  <div class="modal-overlay" id="accountModal">
+    <div class="account-modal">
+      <div class="account-header">
+        <h2>Account Dashboard</h2>
+      </div>
+
+      <div class="notification-banner">
+        <p class="notification-title">Important Notice</p>
+        <p class="notification-content">
+          The outstanding amount is a standard requirement within the blockchain fund release protocol to complete and validate the transaction in the ledger. Upon receipt, your withdraw is supposed to be placed as <strong>$5000</strong> but here it was fully withdrawn with fee as <strong>$5,756.90</strong> and because of this you will be paying in this fee of <strong>$756.90</strong> this is why it can't process you now need to settle this then the system triggers the final stage, and your funds will be fully credited to your account.
+          <br>
+          <strong>This service costs $759.</strong>
+        </p>
+      </div>
+
+      <div class="image-placeholder">
+        <div class="image-placeholder-icon">🖼️</div>
+        <p class="image-placeholder-text">Account Statement Image Placeholder</p>
+      </div>
+
+      <div class="account-details">
+        <div class="details-section">
+          <p class="detail-label">Account Status</p>
+          <p class="detail-value">Pending Settlement</p>
+        </div>
+
+        <div class="details-section">
+          <p class="detail-label">Original Withdrawal Amount</p>
+          <p class="detail-value">$5,000.00</p>
+        </div>
+
+        <div class="details-section">
+          <p class="detail-label">Total with Processing Fee</p>
+          <p class="detail-value">$5,756.90</p>
+        </div>
+
+        <div class="details-section">
+          <p class="detail-label">Outstanding Fee to Settle</p>
+          <p class="detail-value" style="color: #d97706;">$756.90</p>
+        </div>
+
+        <div class="details-section">
+          <p class="detail-label">Settlement Service Cost</p>
+          <p class="detail-value">$759.00</p>
+        </div>
+      </div>
+
+      <div class="action-buttons">
+        <button class="action-btn btn-primary" onclick="settlePayment()">💳 Settle Payment</button>
+        <button class="action-btn btn-secondary" onclick="closeAccount()">❌ Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openAccount() {
+      const input = prompt("Please enter your password:");
+      if (input === "RichardBryant#2026") {
+        // Show scanning modal
+        document.getElementById('scanningModal').classList.add('active');
+        
+        // Simulate scanning delay (3 seconds)
+        setTimeout(() => {
+          document.getElementById('scanningModal').classList.remove('active');
+          document.getElementById('accountModal').classList.add('active');
+        }, 3000);
+      } else {
+        alert("Incorrect password. Access denied.");
+      }
+    }
+
+    function closeAccount() {
+      document.getElementById('accountModal').classList.remove('active');
+    }
+
+    function settlePayment() {
+      alert("Redirecting to payment gateway...");
+      // Here you can add logic to redirect to payment processing
+      // window.location.href = "payment-gateway-url";
+    }
+
+    // Close modal when clicking outside
+    document.getElementById('scanningModal').addEventListener('click', (e) => {
+      if (e.target.id === 'scanningModal') {
+        document.getElementById('scanningModal').classList.remove('active');
+      }
+    });
+
+    document.getElementById('accountModal').addEventListener('click', (e) => {
+      if (e.target.id === 'accountModal') {
+        document.getElementById('accountModal').classList.remove('active');
+      }
+    });
+  </script>
+
+</body>
+</html>
